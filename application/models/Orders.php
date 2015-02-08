@@ -19,7 +19,9 @@ class Orders extends MY_Model {
 
     // calculate the total for an order
     function total($num) {
-        return 0.0;
+        $o = $this->orders->get($num);
+        
+        return $o->total;
     }
 
     // retrieve the details for an order
