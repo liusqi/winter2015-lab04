@@ -105,7 +105,7 @@ class Order extends Application {
         $record = $this->orders->get($order_num);
         $record->date = date(DATE_ATOM);
         $record->status = 'c';
-        $record->total = $this->orders->total($order_num);
+        
         $this->orders->update($record);
         redirect('/');
     }
@@ -114,7 +114,8 @@ class Order extends Application {
     function cancel($order_num) {
         $this->orderitems->delete_some($order_num);
         $record = $this->orders->get($order_num);
-        $record->orders->update($record);
+        $record->status = 'x';
+        $this->orders->update($record);
         
         redirect('/');
     }
